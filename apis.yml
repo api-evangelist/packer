@@ -1,0 +1,15 @@
+name: Packer
+description: Packer is an open-source tool by HashiCorp for creating identical machine
+  images for multiple platforms from a single source configuration. It automates the
+  creation of pre-configured virtual machine and container images, ensuring consistency
+  across development, staging, and production environments.
+url: https://www.packer.io/
+tags:
+- Infrastructure As Code
+- DevOps
+- Automation
+- Image Building
+created: '2025'
+modified: '2025'
+apis: []
+common: []
