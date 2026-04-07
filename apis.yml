@@ -7,11 +7,11 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Infrastructure As Code
-  - DevOps
   - Automation
-  - Image Building
+  - DevOps
   - HashiCorp
+  - Image Building
+  - Infrastructure as Code
 url: >-
   https://raw.githubusercontent.com/api-evangelist/packer/refs/heads/main/apis.yml
 created: '2026-03-16'
@@ -25,9 +25,9 @@ apis:
       platforms from a single source configuration.
     humanURL: https://www.packer.io/
     tags:
-      - Infrastructure As Code
-      - DevOps
       - Automation
+      - DevOps
+      - Infrastructure as Code
     properties:
       - type: Documentation
         url: https://developer.hashicorp.com/packer/docs
