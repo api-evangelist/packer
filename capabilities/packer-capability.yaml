@@ -1,0 +1,2111 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: HashiCorp Cloud Platform Packer Artifact Registry
+  description: API for managing Packer images.
+  tags:
+  - Packer
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: packer
+    baseUri: //api.cloud.hashicorp.com
+    description: HashiCorp Cloud Platform Packer Artifact Registry HTTP API.
+    authentication:
+      type: apikey
+      in: header
+      name: Authorization
+      value: '{{PACKER_TOKEN}}'
+    resources:
+    - name: packer-2021-04-30-organizations-location-organiz
+      path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}
+      operations:
+      - name: getbuild
+        method: GET
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: build_id
+          in: path
+          type: string
+          required: true
+          description: Unique identifier of the build that should be retrieved; this ID was created and set by the HCP Packer
+            registry when the build was created.
+        - name: location.region.provider
+          in: query
+          type: string
+          description: provider is the named cloud provider ("aws", "gcp", "azure").
+        - name: location.region.region
+          in: query
+          type: string
+          description: region is the cloud region ("us-west1", "us-east1").
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletebuild
+        method: DELETE
+        description: DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: build_id
+          in: path
+          type: string
+          required: true
+          description: Unique identifier of the build that should be deleted; this ID was created and set by the HCP Packer
+            registry when the build was created.
+        - name: location.region.provider
+          in: query
+          type: string
+          description: provider is the named cloud provider ("aws", "gcp", "azure").
+        - name: location.region.region
+          in: query
+          type: string
+          description: region is the cloud region ("us-west1", "us-east1").
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatebuild
+        method: PATCH
+        description: PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: build_id
+          in: path
+          type: string
+          required: true
+          description: Unique identifier of the build that should be updated; this ID was created and set by the HCP Packer
+            registry when the build was created.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: packer-2021-04-30-organizations-location-organiz
+      path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images
+      operations:
+      - name: listbuckets
+        method: GET
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: location.region.provider
+          in: query
+          type: string
+          description: provider is the named cloud provider ("aws", "gcp", "azure").
+        - name: location.region.region
+          in: query
+          type: string
+          description: region is the cloud region ("us-west1", "us-east1").
+        - name: pagination.page_size
+          in: query
+          type: integer
+          description: The max number of results per page that should be returned. If the number of available results is larger
+            than `page_size`, a `next_page_token` is returned which
+        - name: pagination.next_page_token
+          in: query
+          type: string
+          description: Specifies a page token to use to retrieve the next page. Set this to the `next_page_token` returned
+            by previous list requests to get the next page of results. I
+        - name: pagination.previous_page_token
+          in: query
+          type: string
+          description: Specifies a page token to use to retrieve the previous page. Set this to the `previous_page_token`
+            returned by previous list requests to get the previous page o
+        - name: sorting.order_by
+          in: query
+          type: array
+          description: Specifies the list of per field ordering that should be used for sorting. The order matters as rows
+            are sorted in order by fields and when the field matches, th
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createbucket
+        method: PUT
+        description: PUT /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: packer-2021-04-30-organizations-location-organiz
+      path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}
+      operations:
+      - name: getbucket
+        method: GET
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: bucket_slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the bucket.
+        - name: location.region.provider
+          in: query
+          type: string
+          description: provider is the named cloud provider ("aws", "gcp", "azure").
+        - name: location.region.region
+          in: query
+          type: string
+          description: region is the cloud region ("us-west1", "us-east1").
+        - name: bucket_id
+          in: query
+          type: string
+          description: Unique identifier of the bucket; created and set by the HCP Packer registry when the bucket is created.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletebucket
+        method: DELETE
+        description: DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: bucket_slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the bucket.
+        - name: location.region.provider
+          in: query
+          type: string
+          description: provider is the named cloud provider ("aws", "gcp", "azure").
+        - name: location.region.region
+          in: query
+          type: string
+          description: region is the cloud region ("us-west1", "us-east1").
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatebucket
+        method: PATCH
+        description: PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: bucket_slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the bucket.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: packer-2021-04-30-organizations-location-organiz
+      path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels
+      operations:
+      - name: listchannels
+        method: GET
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: bucket_slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the bucket you want to list channels for.
+        - name: location.region.provider
+          in: query
+          type: string
+          description: provider is the named cloud provider ("aws", "gcp", "azure").
+        - name: location.region.region
+          in: query
+          type: string
+          description: region is the cloud region ("us-west1", "us-east1").
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createchannel
+        method: POST
+        description: POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: bucket_slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the bucket to associate the channel with.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: packer-2021-04-30-organizations-location-organiz
+      path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}
+      operations:
+      - name: getchannel
+        method: GET
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: bucket_slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the bucket that the channel is associated with.
+        - name: slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the channel.
+        - name: location.region.provider
+          in: query
+          type: string
+          description: provider is the named cloud provider ("aws", "gcp", "azure").
+        - name: location.region.region
+          in: query
+          type: string
+          description: region is the cloud region ("us-west1", "us-east1").
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletechannel
+        method: DELETE
+        description: DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: bucket_slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the bucket that the channel is associated with.
+        - name: slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the channel.
+        - name: location.region.provider
+          in: query
+          type: string
+          description: provider is the named cloud provider ("aws", "gcp", "azure").
+        - name: location.region.region
+          in: query
+          type: string
+          description: region is the cloud region ("us-west1", "us-east1").
+        - name: revocation_message
+          in: query
+          type: string
+          description: Optional field to provide the reason for why this channel is being revoked. Only useful for a channel
+            that is assigned to an iteration.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatechannel
+        method: PATCH
+        description: PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: bucket_slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the bucket that the channel is associated with.
+        - name: slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the channel.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: packer-2021-04-30-organizations-location-organiz
+      path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iteration
+      operations:
+      - name: getiteration
+        method: GET
+        description: 'GetIteration allows the user to retrieve an iteration using one of the following identifiers: * iteration_id
+          * incremental_version * fingerprint'
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: bucket_slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the bucket.
+        - name: location.region.provider
+          in: query
+          type: string
+          description: provider is the named cloud provider ("aws", "gcp", "azure").
+        - name: location.region.region
+          in: query
+          type: string
+          description: region is the cloud region ("us-west1", "us-east1").
+        - name: incremental_version
+          in: query
+          type: integer
+          description: The human-readable version number assigned to this iteration.
+        - name: iteration_id
+          in: query
+          type: string
+          description: Unique identifier of the iteration. This was created and set by the HCP Packer registry when the iteration
+            was created.
+        - name: fingerprint
+          in: query
+          type: string
+          description: Fingerprint of the iteration. The fingerprint is set by Packer when you call `packer build`. It will
+            most often correspond to a git commit sha, but can be manua
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: packer-2021-04-30-organizations-location-organiz
+      path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations
+      operations:
+      - name: listiterations
+        method: GET
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: bucket_slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the bucket.
+        - name: location.region.provider
+          in: query
+          type: string
+          description: provider is the named cloud provider ("aws", "gcp", "azure").
+        - name: location.region.region
+          in: query
+          type: string
+          description: region is the cloud region ("us-west1", "us-east1").
+        - name: include_incomplete
+          in: query
+          type: boolean
+          description: If true, the request will return information about iterations that have not been marked "complete".
+            By default, this is false and the list request will only ret
+        - name: pagination.page_size
+          in: query
+          type: integer
+          description: The max number of results per page that should be returned. If the number of available results is larger
+            than `page_size`, a `next_page_token` is returned which
+        - name: pagination.next_page_token
+          in: query
+          type: string
+          description: Specifies a page token to use to retrieve the next page. Set this to the `next_page_token` returned
+            by previous list requests to get the next page of results. I
+        - name: pagination.previous_page_token
+          in: query
+          type: string
+          description: Specifies a page token to use to retrieve the previous page. Set this to the `previous_page_token`
+            returned by previous list requests to get the previous page o
+        - name: sorting.order_by
+          in: query
+          type: array
+          description: Specifies the list of per field ordering that should be used for sorting. The order matters as rows
+            are sorted in order by fields and when the field matches, th
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createiteration
+        method: POST
+        description: POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: bucket_slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the bucket.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: packer-2021-04-30-organizations-location-organiz
+      path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/ancestors
+      operations:
+      - name: getancestorimages
+        method: GET
+        description: API Endpoints to ease UI implementation
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: bucket_slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the bucket.
+        - name: incremental_version
+          in: path
+          type: integer
+          required: true
+          description: The human-readable version number assigned to this iteration.
+        - name: location.region.provider
+          in: query
+          type: string
+          description: provider is the named cloud provider ("aws", "gcp", "azure").
+        - name: location.region.region
+          in: query
+          type: string
+          description: region is the cloud region ("us-west1", "us-east1").
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: packer-2021-04-30-organizations-location-organiz
+      path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/children
+      operations:
+      - name: getchildimages
+        method: GET
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/children
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: bucket_slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the bucket.
+        - name: incremental_version
+          in: path
+          type: integer
+          required: true
+          description: The human-readable version number assigned to this iteration.
+        - name: location.region.provider
+          in: query
+          type: string
+          description: provider is the named cloud provider ("aws", "gcp", "azure").
+        - name: location.region.region
+          in: query
+          type: string
+          description: region is the cloud region ("us-west1", "us-east1").
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: packer-2021-04-30-organizations-location-organiz
+      path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}
+      operations:
+      - name: createbuild
+        method: POST
+        description: POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: bucket_slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the bucket.
+        - name: iteration_id
+          in: path
+          type: string
+          required: true
+          description: Unique identifier of the iteration that this build should be associated with.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: packer-2021-04-30-organizations-location-organiz
+      path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}/builds
+      operations:
+      - name: listbuilds
+        method: GET
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}/builds
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: bucket_slug
+          in: path
+          type: string
+          required: true
+          description: Human-readable name for the bucket to list builds for.
+        - name: iteration_id
+          in: path
+          type: string
+          required: true
+          description: Unique identifier of the iteration to list builds for; this was created and set by the HCP Packer registry
+            when the iteration was created.
+        - name: location.region.provider
+          in: query
+          type: string
+          description: provider is the named cloud provider ("aws", "gcp", "azure").
+        - name: location.region.region
+          in: query
+          type: string
+          description: region is the cloud region ("us-west1", "us-east1").
+        - name: pagination.page_size
+          in: query
+          type: integer
+          description: The max number of results per page that should be returned. If the number of available results is larger
+            than `page_size`, a `next_page_token` is returned which
+        - name: pagination.next_page_token
+          in: query
+          type: string
+          description: Specifies a page token to use to retrieve the next page. Set this to the `next_page_token` returned
+            by previous list requests to get the next page of results. I
+        - name: pagination.previous_page_token
+          in: query
+          type: string
+          description: Specifies a page token to use to retrieve the previous page. Set this to the `previous_page_token`
+            returned by previous list requests to get the previous page o
+        - name: sorting.order_by
+          in: query
+          type: array
+          description: Specifies the list of per field ordering that should be used for sorting. The order matters as rows
+            are sorted in order by fields and when the field matches, th
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: packer-2021-04-30-organizations-location-organiz
+      path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}
+      operations:
+      - name: deleteiteration
+        method: DELETE
+        description: DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: iteration_id
+          in: path
+          type: string
+          required: true
+          description: Unique identifier of the iteration. This was created and set by the HCP Packer registry when the iteration
+            was created.
+        - name: location.region.provider
+          in: query
+          type: string
+          description: provider is the named cloud provider ("aws", "gcp", "azure").
+        - name: location.region.region
+          in: query
+          type: string
+          description: region is the cloud region ("us-west1", "us-east1").
+        - name: bucket_slug
+          in: query
+          type: string
+          description: Human-readable name for the bucket.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateiteration
+        method: PATCH
+        description: UpdateIteration is used to mark an iteration "complete", once all builds are complete. To make build-specific
+          updates for builds within the iteration, use the UpdateBuild endpoint.
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: iteration_id
+          in: path
+          type: string
+          required: true
+          description: Unique identifier of the iteration. This was created and set by the HCP Packer registry when the iteration
+            was created.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: packer-2021-04-30-organizations-location-organiz
+      path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry
+      operations:
+      - name: getregistry
+        method: GET
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        - name: location.region.provider
+          in: query
+          type: string
+          description: provider is the named cloud provider ("aws", "gcp", "azure").
+        - name: location.region.region
+          in: query
+          type: string
+          description: region is the cloud region ("us-west1", "us-east1").
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createregistry
+        method: PUT
+        description: PUT /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry
+        inputParameters:
+        - name: location.organization_id
+          in: path
+          type: string
+          required: true
+          description: organization_id is the id of the organization.
+        - name: location.project_id
+          in: path
+          type: string
+          required: true
+          description: project_id is the projects id.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: packer-rest
+    description: REST adapter for HashiCorp Cloud Platform Packer Artifact Registry.
+    resources:
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}
+      name: getbuild
+      operations:
+      - method: GET
+        name: getbuild
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}
+        call: packer.getbuild
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          build_id: rest.build_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}
+      name: deletebuild
+      operations:
+      - method: DELETE
+        name: deletebuild
+        description: DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}
+        call: packer.deletebuild
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          build_id: rest.build_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}
+      name: updatebuild
+      operations:
+      - method: PATCH
+        name: updatebuild
+        description: PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}
+        call: packer.updatebuild
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          build_id: rest.build_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images
+      name: listbuckets
+      operations:
+      - method: GET
+        name: listbuckets
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images
+        call: packer.listbuckets
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images
+      name: createbucket
+      operations:
+      - method: PUT
+        name: createbucket
+        description: PUT /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images
+        call: packer.createbucket
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}
+      name: getbucket
+      operations:
+      - method: GET
+        name: getbucket
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}
+        call: packer.getbucket
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          bucket_slug: rest.bucket_slug
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}
+      name: deletebucket
+      operations:
+      - method: DELETE
+        name: deletebucket
+        description: DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}
+        call: packer.deletebucket
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          bucket_slug: rest.bucket_slug
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}
+      name: updatebucket
+      operations:
+      - method: PATCH
+        name: updatebucket
+        description: PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}
+        call: packer.updatebucket
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          bucket_slug: rest.bucket_slug
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels
+      name: listchannels
+      operations:
+      - method: GET
+        name: listchannels
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels
+        call: packer.listchannels
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          bucket_slug: rest.bucket_slug
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels
+      name: createchannel
+      operations:
+      - method: POST
+        name: createchannel
+        description: POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels
+        call: packer.createchannel
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          bucket_slug: rest.bucket_slug
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}
+      name: getchannel
+      operations:
+      - method: GET
+        name: getchannel
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}
+        call: packer.getchannel
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          bucket_slug: rest.bucket_slug
+          slug: rest.slug
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}
+      name: deletechannel
+      operations:
+      - method: DELETE
+        name: deletechannel
+        description: DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}
+        call: packer.deletechannel
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          bucket_slug: rest.bucket_slug
+          slug: rest.slug
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}
+      name: updatechannel
+      operations:
+      - method: PATCH
+        name: updatechannel
+        description: PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}
+        call: packer.updatechannel
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          bucket_slug: rest.bucket_slug
+          slug: rest.slug
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iteration
+      name: getiteration
+      operations:
+      - method: GET
+        name: getiteration
+        description: 'GetIteration allows the user to retrieve an iteration using one of the following identifiers: * iteration_id
+          * incremental_version * fingerprint'
+        call: packer.getiteration
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          bucket_slug: rest.bucket_slug
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations
+      name: listiterations
+      operations:
+      - method: GET
+        name: listiterations
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations
+        call: packer.listiterations
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          bucket_slug: rest.bucket_slug
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations
+      name: createiteration
+      operations:
+      - method: POST
+        name: createiteration
+        description: POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations
+        call: packer.createiteration
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          bucket_slug: rest.bucket_slug
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/ancestors
+      name: getancestorimages
+      operations:
+      - method: GET
+        name: getancestorimages
+        description: API Endpoints to ease UI implementation
+        call: packer.getancestorimages
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          bucket_slug: rest.bucket_slug
+          incremental_version: rest.incremental_version
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/children
+      name: getchildimages
+      operations:
+      - method: GET
+        name: getchildimages
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/children
+        call: packer.getchildimages
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          bucket_slug: rest.bucket_slug
+          incremental_version: rest.incremental_version
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}
+      name: createbuild
+      operations:
+      - method: POST
+        name: createbuild
+        description: POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}
+        call: packer.createbuild
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          bucket_slug: rest.bucket_slug
+          iteration_id: rest.iteration_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}/builds
+      name: listbuilds
+      operations:
+      - method: GET
+        name: listbuilds
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}/builds
+        call: packer.listbuilds
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          bucket_slug: rest.bucket_slug
+          iteration_id: rest.iteration_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}
+      name: deleteiteration
+      operations:
+      - method: DELETE
+        name: deleteiteration
+        description: DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}
+        call: packer.deleteiteration
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          iteration_id: rest.iteration_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}
+      name: updateiteration
+      operations:
+      - method: PATCH
+        name: updateiteration
+        description: UpdateIteration is used to mark an iteration "complete", once all builds are complete. To make build-specific
+          updates for builds within the iteration, use the UpdateBuild endpoint.
+        call: packer.updateiteration
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+          iteration_id: rest.iteration_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry
+      name: getregistry
+      operations:
+      - method: GET
+        name: getregistry
+        description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry
+        call: packer.getregistry
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry
+      name: createregistry
+      operations:
+      - method: PUT
+        name: createregistry
+        description: PUT /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry
+        call: packer.createregistry
+        with:
+          location.organization_id: rest.location.organization_id
+          location.project_id: rest.location.project_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: packer-mcp
+    transport: http
+    description: MCP adapter for HashiCorp Cloud Platform Packer Artifact Registry for AI agent use.
+    tools:
+    - name: getbuild
+      description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: packer.getbuild
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        build_id: tools.build_id
+        location.region.provider: tools.location.region.provider
+        location.region.region: tools.location.region.region
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: build_id
+        type: string
+        description: Unique identifier of the build that should be retrieved; this ID was created and set by the HCP Packer
+          registry when the build was created.
+        required: true
+      - name: location.region.provider
+        type: string
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+      - name: location.region.region
+        type: string
+        description: region is the cloud region ("us-west1", "us-east1").
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletebuild
+      description: DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: packer.deletebuild
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        build_id: tools.build_id
+        location.region.provider: tools.location.region.provider
+        location.region.region: tools.location.region.region
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: build_id
+        type: string
+        description: Unique identifier of the build that should be deleted; this ID was created and set by the HCP Packer
+          registry when the build was created.
+        required: true
+      - name: location.region.provider
+        type: string
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+      - name: location.region.region
+        type: string
+        description: region is the cloud region ("us-west1", "us-east1").
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatebuild
+      description: PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: packer.updatebuild
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        build_id: tools.build_id
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: build_id
+        type: string
+        description: Unique identifier of the build that should be updated; this ID was created and set by the HCP Packer
+          registry when the build was created.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listbuckets
+      description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: packer.listbuckets
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        location.region.provider: tools.location.region.provider
+        location.region.region: tools.location.region.region
+        pagination.page_size: tools.pagination.page_size
+        pagination.next_page_token: tools.pagination.next_page_token
+        pagination.previous_page_token: tools.pagination.previous_page_token
+        sorting.order_by: tools.sorting.order_by
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: location.region.provider
+        type: string
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+      - name: location.region.region
+        type: string
+        description: region is the cloud region ("us-west1", "us-east1").
+      - name: pagination.page_size
+        type: integer
+        description: The max number of results per page that should be returned. If the number of available results is larger
+          than `page_size`, a `next_page_token` is returned which
+      - name: pagination.next_page_token
+        type: string
+        description: Specifies a page token to use to retrieve the next page. Set this to the `next_page_token` returned by
+          previous list requests to get the next page of results. I
+      - name: pagination.previous_page_token
+        type: string
+        description: Specifies a page token to use to retrieve the previous page. Set this to the `previous_page_token` returned
+          by previous list requests to get the previous page o
+      - name: sorting.order_by
+        type: array
+        description: Specifies the list of per field ordering that should be used for sorting. The order matters as rows are
+          sorted in order by fields and when the field matches, th
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createbucket
+      description: PUT /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: packer.createbucket
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getbucket
+      description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: packer.getbucket
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        bucket_slug: tools.bucket_slug
+        location.region.provider: tools.location.region.provider
+        location.region.region: tools.location.region.region
+        bucket_id: tools.bucket_id
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: bucket_slug
+        type: string
+        description: Human-readable name for the bucket.
+        required: true
+      - name: location.region.provider
+        type: string
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+      - name: location.region.region
+        type: string
+        description: region is the cloud region ("us-west1", "us-east1").
+      - name: bucket_id
+        type: string
+        description: Unique identifier of the bucket; created and set by the HCP Packer registry when the bucket is created.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletebucket
+      description: DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: packer.deletebucket
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        bucket_slug: tools.bucket_slug
+        location.region.provider: tools.location.region.provider
+        location.region.region: tools.location.region.region
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: bucket_slug
+        type: string
+        description: Human-readable name for the bucket.
+        required: true
+      - name: location.region.provider
+        type: string
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+      - name: location.region.region
+        type: string
+        description: region is the cloud region ("us-west1", "us-east1").
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatebucket
+      description: PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: packer.updatebucket
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        bucket_slug: tools.bucket_slug
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: bucket_slug
+        type: string
+        description: Human-readable name for the bucket.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listchannels
+      description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: packer.listchannels
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        bucket_slug: tools.bucket_slug
+        location.region.provider: tools.location.region.provider
+        location.region.region: tools.location.region.region
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: bucket_slug
+        type: string
+        description: Human-readable name for the bucket you want to list channels for.
+        required: true
+      - name: location.region.provider
+        type: string
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+      - name: location.region.region
+        type: string
+        description: region is the cloud region ("us-west1", "us-east1").
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createchannel
+      description: POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: packer.createchannel
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        bucket_slug: tools.bucket_slug
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: bucket_slug
+        type: string
+        description: Human-readable name for the bucket to associate the channel with.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getchannel
+      description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: packer.getchannel
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        bucket_slug: tools.bucket_slug
+        slug: tools.slug
+        location.region.provider: tools.location.region.provider
+        location.region.region: tools.location.region.region
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: bucket_slug
+        type: string
+        description: Human-readable name for the bucket that the channel is associated with.
+        required: true
+      - name: slug
+        type: string
+        description: Human-readable name for the channel.
+        required: true
+      - name: location.region.provider
+        type: string
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+      - name: location.region.region
+        type: string
+        description: region is the cloud region ("us-west1", "us-east1").
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletechannel
+      description: DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: packer.deletechannel
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        bucket_slug: tools.bucket_slug
+        slug: tools.slug
+        location.region.provider: tools.location.region.provider
+        location.region.region: tools.location.region.region
+        revocation_message: tools.revocation_message
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: bucket_slug
+        type: string
+        description: Human-readable name for the bucket that the channel is associated with.
+        required: true
+      - name: slug
+        type: string
+        description: Human-readable name for the channel.
+        required: true
+      - name: location.region.provider
+        type: string
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+      - name: location.region.region
+        type: string
+        description: region is the cloud region ("us-west1", "us-east1").
+      - name: revocation_message
+        type: string
+        description: Optional field to provide the reason for why this channel is being revoked. Only useful for a channel
+          that is assigned to an iteration.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatechannel
+      description: PATCH /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: packer.updatechannel
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        bucket_slug: tools.bucket_slug
+        slug: tools.slug
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: bucket_slug
+        type: string
+        description: Human-readable name for the bucket that the channel is associated with.
+        required: true
+      - name: slug
+        type: string
+        description: Human-readable name for the channel.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getiteration
+      description: 'GetIteration allows the user to retrieve an iteration using one of the following identifiers: * iteration_id
+        * incremental_version * fingerprint'
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: packer.getiteration
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        bucket_slug: tools.bucket_slug
+        location.region.provider: tools.location.region.provider
+        location.region.region: tools.location.region.region
+        incremental_version: tools.incremental_version
+        iteration_id: tools.iteration_id
+        fingerprint: tools.fingerprint
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: bucket_slug
+        type: string
+        description: Human-readable name for the bucket.
+        required: true
+      - name: location.region.provider
+        type: string
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+      - name: location.region.region
+        type: string
+        description: region is the cloud region ("us-west1", "us-east1").
+      - name: incremental_version
+        type: integer
+        description: The human-readable version number assigned to this iteration.
+      - name: iteration_id
+        type: string
+        description: Unique identifier of the iteration. This was created and set by the HCP Packer registry when the iteration
+          was created.
+      - name: fingerprint
+        type: string
+        description: Fingerprint of the iteration. The fingerprint is set by Packer when you call `packer build`. It will
+          most often correspond to a git commit sha, but can be manua
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listiterations
+      description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: packer.listiterations
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        bucket_slug: tools.bucket_slug
+        location.region.provider: tools.location.region.provider
+        location.region.region: tools.location.region.region
+        include_incomplete: tools.include_incomplete
+        pagination.page_size: tools.pagination.page_size
+        pagination.next_page_token: tools.pagination.next_page_token
+        pagination.previous_page_token: tools.pagination.previous_page_token
+        sorting.order_by: tools.sorting.order_by
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: bucket_slug
+        type: string
+        description: Human-readable name for the bucket.
+        required: true
+      - name: location.region.provider
+        type: string
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+      - name: location.region.region
+        type: string
+        description: region is the cloud region ("us-west1", "us-east1").
+      - name: include_incomplete
+        type: boolean
+        description: If true, the request will return information about iterations that have not been marked "complete". By
+          default, this is false and the list request will only ret
+      - name: pagination.page_size
+        type: integer
+        description: The max number of results per page that should be returned. If the number of available results is larger
+          than `page_size`, a `next_page_token` is returned which
+      - name: pagination.next_page_token
+        type: string
+        description: Specifies a page token to use to retrieve the next page. Set this to the `next_page_token` returned by
+          previous list requests to get the next page of results. I
+      - name: pagination.previous_page_token
+        type: string
+        description: Specifies a page token to use to retrieve the previous page. Set this to the `previous_page_token` returned
+          by previous list requests to get the previous page o
+      - name: sorting.order_by
+        type: array
+        description: Specifies the list of per field ordering that should be used for sorting. The order matters as rows are
+          sorted in order by fields and when the field matches, th
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createiteration
+      description: POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: packer.createiteration
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        bucket_slug: tools.bucket_slug
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: bucket_slug
+        type: string
+        description: Human-readable name for the bucket.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getancestorimages
+      description: API Endpoints to ease UI implementation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: packer.getancestorimages
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        bucket_slug: tools.bucket_slug
+        incremental_version: tools.incremental_version
+        location.region.provider: tools.location.region.provider
+        location.region.region: tools.location.region.region
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: bucket_slug
+        type: string
+        description: Human-readable name for the bucket.
+        required: true
+      - name: incremental_version
+        type: integer
+        description: The human-readable version number assigned to this iteration.
+        required: true
+      - name: location.region.provider
+        type: string
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+      - name: location.region.region
+        type: string
+        description: region is the cloud region ("us-west1", "us-east1").
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getchildimages
+      description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/children
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: packer.getchildimages
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        bucket_slug: tools.bucket_slug
+        incremental_version: tools.incremental_version
+        location.region.provider: tools.location.region.provider
+        location.region.region: tools.location.region.region
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: bucket_slug
+        type: string
+        description: Human-readable name for the bucket.
+        required: true
+      - name: incremental_version
+        type: integer
+        description: The human-readable version number assigned to this iteration.
+        required: true
+      - name: location.region.provider
+        type: string
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+      - name: location.region.region
+        type: string
+        description: region is the cloud region ("us-west1", "us-east1").
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createbuild
+      description: POST /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: packer.createbuild
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        bucket_slug: tools.bucket_slug
+        iteration_id: tools.iteration_id
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: bucket_slug
+        type: string
+        description: Human-readable name for the bucket.
+        required: true
+      - name: iteration_id
+        type: string
+        description: Unique identifier of the iteration that this build should be associated with.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listbuilds
+      description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}/builds
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: packer.listbuilds
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        bucket_slug: tools.bucket_slug
+        iteration_id: tools.iteration_id
+        location.region.provider: tools.location.region.provider
+        location.region.region: tools.location.region.region
+        pagination.page_size: tools.pagination.page_size
+        pagination.next_page_token: tools.pagination.next_page_token
+        pagination.previous_page_token: tools.pagination.previous_page_token
+        sorting.order_by: tools.sorting.order_by
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: bucket_slug
+        type: string
+        description: Human-readable name for the bucket to list builds for.
+        required: true
+      - name: iteration_id
+        type: string
+        description: Unique identifier of the iteration to list builds for; this was created and set by the HCP Packer registry
+          when the iteration was created.
+        required: true
+      - name: location.region.provider
+        type: string
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+      - name: location.region.region
+        type: string
+        description: region is the cloud region ("us-west1", "us-east1").
+      - name: pagination.page_size
+        type: integer
+        description: The max number of results per page that should be returned. If the number of available results is larger
+          than `page_size`, a `next_page_token` is returned which
+      - name: pagination.next_page_token
+        type: string
+        description: Specifies a page token to use to retrieve the next page. Set this to the `next_page_token` returned by
+          previous list requests to get the next page of results. I
+      - name: pagination.previous_page_token
+        type: string
+        description: Specifies a page token to use to retrieve the previous page. Set this to the `previous_page_token` returned
+          by previous list requests to get the previous page o
+      - name: sorting.order_by
+        type: array
+        description: Specifies the list of per field ordering that should be used for sorting. The order matters as rows are
+          sorted in order by fields and when the field matches, th
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteiteration
+      description: DELETE /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: packer.deleteiteration
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        iteration_id: tools.iteration_id
+        location.region.provider: tools.location.region.provider
+        location.region.region: tools.location.region.region
+        bucket_slug: tools.bucket_slug
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: iteration_id
+        type: string
+        description: Unique identifier of the iteration. This was created and set by the HCP Packer registry when the iteration
+          was created.
+        required: true
+      - name: location.region.provider
+        type: string
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+      - name: location.region.region
+        type: string
+        description: region is the cloud region ("us-west1", "us-east1").
+      - name: bucket_slug
+        type: string
+        description: Human-readable name for the bucket.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateiteration
+      description: UpdateIteration is used to mark an iteration "complete", once all builds are complete. To make build-specific
+        updates for builds within the iteration, use the UpdateBuild endpoint.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: packer.updateiteration
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        iteration_id: tools.iteration_id
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: iteration_id
+        type: string
+        description: Unique identifier of the iteration. This was created and set by the HCP Packer registry when the iteration
+          was created.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getregistry
+      description: GET /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: packer.getregistry
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+        location.region.provider: tools.location.region.provider
+        location.region.region: tools.location.region.region
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      - name: location.region.provider
+        type: string
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+      - name: location.region.region
+        type: string
+        description: region is the cloud region ("us-west1", "us-east1").
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createregistry
+      description: PUT /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: packer.createregistry
+      with:
+        location.organization_id: tools.location.organization_id
+        location.project_id: tools.location.project_id
+      inputParameters:
+      - name: location.organization_id
+        type: string
+        description: organization_id is the id of the organization.
+        required: true
+      - name: location.project_id
+        type: string
+        description: project_id is the projects id.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    PACKER_TOKEN: PACKER_TOKEN
