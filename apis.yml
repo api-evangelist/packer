@@ -35,7 +35,7 @@ apis:
     properties:
       - type: Documentation
         url: https://developer.hashicorp.com/packer/docs
-      - type: Getting Started
+      - type: GettingStarted
         url: https://developer.hashicorp.com/packer/tutorials
   - aid: packer:hcp-packer-artifact-registry
     name: HCP Packer Artifact Registry API
@@ -55,14 +55,14 @@ apis:
         url: https://developer.hashicorp.com/hcp/api-docs/packer
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/packer/refs/heads/main/openapi/packer-openapi.yml
-      - type: Status
+      - type: StatusPage
         url: https://status.hashicorp.com
 common:
   - type: Website
     url: https://www.packer.io/
   - type: Documentation
     url: https://developer.hashicorp.com/packer/docs
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/hashicorp/packer
   - type: Community
     url: https://discuss.hashicorp.com/c/packer
