@@ -1,0 +1,1097 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HashiCorp Cloud Platform Packer Artifact Registry",
+    "version": "2021-04-30"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PackerService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetBuild",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/builds/:build_id",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "build_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the build that should be retrieved; this ID was\ncreated and set by the HCP Packer registry when the build was created."
+              },
+              {
+                "name": "location.region.provider",
+                "value": "",
+                "type": "query",
+                "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\")."
+              },
+              {
+                "name": "location.region.region",
+                "value": "",
+                "type": "query",
+                "description": "region is the cloud region (\"us-west1\", \"us-east1\")."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "UpdateBuild",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/builds/:build_id",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "build_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the build that should be updated; this ID was\ncreated and set by the HCP Packer registry when the build was created."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DeleteBuild",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/builds/:build_id",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "build_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the build that should be deleted; this ID was\ncreated and set by the HCP Packer registry when the build was created."
+              },
+              {
+                "name": "location.region.provider",
+                "value": "",
+                "type": "query",
+                "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\")."
+              },
+              {
+                "name": "location.region.region",
+                "value": "",
+                "type": "query",
+                "description": "region is the cloud region (\"us-west1\", \"us-east1\")."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "ListBuckets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "location.region.provider",
+                "value": "",
+                "type": "query",
+                "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\")."
+              },
+              {
+                "name": "location.region.region",
+                "value": "",
+                "type": "query",
+                "description": "region is the cloud region (\"us-west1\", \"us-east1\")."
+              },
+              {
+                "name": "pagination.page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max number of results per page that should be returned. If the number\nof available results is larger than `page_size`, a `next_page_token` is\nreturned which can be used to get the next page of results in subsequent\nrequests. A value of zero will cause `page_size` to be defaulted."
+              },
+              {
+                "name": "pagination.next_page_token",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a page token to use to retrieve the next page. Set this to the\n`next_page_token` returned by previous list requests to get the next page of\nresults. If set, `previous_page_token` must not be set."
+              },
+              {
+                "name": "pagination.previous_page_token",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a page token to use to retrieve the previous page. Set this to\nthe `previous_page_token` returned by previous list requests to get the\nprevious page of results. If set, `next_page_token` must not be set."
+              },
+              {
+                "name": "sorting.order_by",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the list of per field ordering that should be used for sorting. \nThe order matters as rows are sorted in order by fields and when the field\nmatches, the next field is used to tie break the ordering.\nThe per field default ordering is ascending.  \n\nThe fields should be immutabile, unique, and orderable. If the field is\nnot unique, more than one sort fields should be passed.\n\nExample: oder_by=name,age desc,created_at asc\nIn that case, 'name' will get the default 'ascending' order."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "CreateBucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GetBucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images/:bucket_slug",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "bucket_slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the bucket."
+              },
+              {
+                "name": "location.region.provider",
+                "value": "",
+                "type": "query",
+                "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\")."
+              },
+              {
+                "name": "location.region.region",
+                "value": "",
+                "type": "query",
+                "description": "region is the cloud region (\"us-west1\", \"us-east1\")."
+              },
+              {
+                "name": "bucket_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the bucket; created and set by the HCP Packer\nregistry when the bucket is created."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "UpdateBucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images/:bucket_slug",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "bucket_slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the bucket."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DeleteBucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images/:bucket_slug",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "bucket_slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the bucket."
+              },
+              {
+                "name": "location.region.provider",
+                "value": "",
+                "type": "query",
+                "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\")."
+              },
+              {
+                "name": "location.region.region",
+                "value": "",
+                "type": "query",
+                "description": "region is the cloud region (\"us-west1\", \"us-east1\")."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "ListChannels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images/:bucket_slug/channels",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "bucket_slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the bucket you want to list channels for."
+              },
+              {
+                "name": "location.region.provider",
+                "value": "",
+                "type": "query",
+                "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\")."
+              },
+              {
+                "name": "location.region.region",
+                "value": "",
+                "type": "query",
+                "description": "region is the cloud region (\"us-west1\", \"us-east1\")."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "CreateChannel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images/:bucket_slug/channels",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "bucket_slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the bucket to associate the channel with."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GetChannel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images/:bucket_slug/channels/:slug",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "bucket_slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the bucket that the channel is associated with."
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the channel."
+              },
+              {
+                "name": "location.region.provider",
+                "value": "",
+                "type": "query",
+                "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\")."
+              },
+              {
+                "name": "location.region.region",
+                "value": "",
+                "type": "query",
+                "description": "region is the cloud region (\"us-west1\", \"us-east1\")."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "UpdateChannel",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images/:bucket_slug/channels/:slug",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "bucket_slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the bucket that the channel is associated with."
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the channel."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DeleteChannel",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images/:bucket_slug/channels/:slug",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "bucket_slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the bucket that the channel is associated with."
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the channel."
+              },
+              {
+                "name": "location.region.provider",
+                "value": "",
+                "type": "query",
+                "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\")."
+              },
+              {
+                "name": "location.region.region",
+                "value": "",
+                "type": "query",
+                "description": "region is the cloud region (\"us-west1\", \"us-east1\")."
+              },
+              {
+                "name": "revocation_message",
+                "value": "",
+                "type": "query",
+                "description": "Optional field to provide the reason for why this channel is being revoked.\nOnly useful for a channel that is assigned to an iteration."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetIteration allows the user to retrieve an iteration using one of the following identifiers:\n * iteration_id\n * incremental_version\n * fingerprint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images/:bucket_slug/iteration",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "bucket_slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the bucket."
+              },
+              {
+                "name": "location.region.provider",
+                "value": "",
+                "type": "query",
+                "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\")."
+              },
+              {
+                "name": "location.region.region",
+                "value": "",
+                "type": "query",
+                "description": "region is the cloud region (\"us-west1\", \"us-east1\")."
+              },
+              {
+                "name": "incremental_version",
+                "value": "",
+                "type": "query",
+                "description": "The human-readable version number assigned to this iteration."
+              },
+              {
+                "name": "iteration_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the iteration. This was created and set by the\nHCP Packer registry when the iteration was created."
+              },
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "query",
+                "description": "Fingerprint of the iteration. The fingerprint is set by Packer when you\ncall `packer build`. It will most often correspond to a git commit sha,\nbut can be manually overridden by setting the environment variable\n`HCP_PACKER_BUILD_FINGERPRINT`."
+              }
+            ]
+          },
+          "docs": "These are supplied as a query parameter. For example:\nimages/{bucket_slug}/iteration?fingerprint={fingerprint}\n\nbucket_slug must always be set because it is possible for iterations to\nhave the same incremental_version or fingerprint across buckets"
+        },
+        {
+          "info": {
+            "name": "ListIterations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images/:bucket_slug/iterations",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "bucket_slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the bucket."
+              },
+              {
+                "name": "location.region.provider",
+                "value": "",
+                "type": "query",
+                "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\")."
+              },
+              {
+                "name": "location.region.region",
+                "value": "",
+                "type": "query",
+                "description": "region is the cloud region (\"us-west1\", \"us-east1\")."
+              },
+              {
+                "name": "include_incomplete",
+                "value": "",
+                "type": "query",
+                "description": "If true, the request will return information about iterations that have\nnot been marked \"complete\". By default, this is false and the list\nrequest will only return information about \"complete\" iterations that are\nready for use."
+              },
+              {
+                "name": "pagination.page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max number of results per page that should be returned. If the number\nof available results is larger than `page_size`, a `next_page_token` is\nreturned which can be used to get the next page of results in subsequent\nrequests. A value of zero will cause `page_size` to be defaulted."
+              },
+              {
+                "name": "pagination.next_page_token",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a page token to use to retrieve the next page. Set this to the\n`next_page_token` returned by previous list requests to get the next page of\nresults. If set, `previous_page_token` must not be set."
+              },
+              {
+                "name": "pagination.previous_page_token",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a page token to use to retrieve the previous page. Set this to\nthe `previous_page_token` returned by previous list requests to get the\nprevious page of results. If set, `next_page_token` must not be set."
+              },
+              {
+                "name": "sorting.order_by",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the list of per field ordering that should be used for sorting. \nThe order matters as rows are sorted in order by fields and when the field\nmatches, the next field is used to tie break the ordering.\nThe per field default ordering is ascending.  \n\nThe fields should be immutabile, unique, and orderable. If the field is\nnot unique, more than one sort fields should be passed.\n\nExample: oder_by=name,age desc,created_at asc\nIn that case, 'name' will get the default 'ascending' order."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "CreateIteration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images/:bucket_slug/iterations",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "bucket_slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the bucket."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "API Endpoints to ease UI implementation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images/:bucket_slug/iterations/:incremental_version/ancestors",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "bucket_slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the bucket."
+              },
+              {
+                "name": "incremental_version",
+                "value": "",
+                "type": "path",
+                "description": "The human-readable version number assigned to this iteration."
+              },
+              {
+                "name": "location.region.provider",
+                "value": "",
+                "type": "query",
+                "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\")."
+              },
+              {
+                "name": "location.region.region",
+                "value": "",
+                "type": "query",
+                "description": "region is the cloud region (\"us-west1\", \"us-east1\")."
+              }
+            ]
+          },
+          "docs": "API Endpoints to ease UI implementation"
+        },
+        {
+          "info": {
+            "name": "GetChildImages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images/:bucket_slug/iterations/:incremental_version/children",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "bucket_slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the bucket."
+              },
+              {
+                "name": "incremental_version",
+                "value": "",
+                "type": "path",
+                "description": "The human-readable version number assigned to this iteration."
+              },
+              {
+                "name": "location.region.provider",
+                "value": "",
+                "type": "query",
+                "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\")."
+              },
+              {
+                "name": "location.region.region",
+                "value": "",
+                "type": "query",
+                "description": "region is the cloud region (\"us-west1\", \"us-east1\")."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "CreateBuild",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images/:bucket_slug/iterations/:iteration_id",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "bucket_slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the bucket."
+              },
+              {
+                "name": "iteration_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the iteration that this build should be associated\nwith."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "ListBuilds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/images/:bucket_slug/iterations/:iteration_id/builds",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "bucket_slug",
+                "value": "",
+                "type": "path",
+                "description": "Human-readable name for the bucket to list builds for."
+              },
+              {
+                "name": "iteration_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the iteration to list builds for; this was\ncreated and set by the HCP Packer registry when the iteration was created."
+              },
+              {
+                "name": "location.region.provider",
+                "value": "",
+                "type": "query",
+                "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\")."
+              },
+              {
+                "name": "location.region.region",
+                "value": "",
+                "type": "query",
+                "description": "region is the cloud region (\"us-west1\", \"us-east1\")."
+              },
+              {
+                "name": "pagination.page_size",
+                "value": "",
+                "type": "query",
+                "description": "The max number of results per page that should be returned. If the number\nof available results is larger than `page_size`, a `next_page_token` is\nreturned which can be used to get the next page of results in subsequent\nrequests. A value of zero will cause `page_size` to be defaulted."
+              },
+              {
+                "name": "pagination.next_page_token",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a page token to use to retrieve the next page. Set this to the\n`next_page_token` returned by previous list requests to get the next page of\nresults. If set, `previous_page_token` must not be set."
+              },
+              {
+                "name": "pagination.previous_page_token",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a page token to use to retrieve the previous page. Set this to\nthe `previous_page_token` returned by previous list requests to get the\nprevious page of results. If set, `next_page_token` must not be set."
+              },
+              {
+                "name": "sorting.order_by",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the list of per field ordering that should be used for sorting. \nThe order matters as rows are sorted in order by fields and when the field\nmatches, the next field is used to tie break the ordering.\nThe per field default ordering is ascending.  \n\nThe fields should be immutabile, unique, and orderable. If the field is\nnot unique, more than one sort fields should be passed.\n\nExample: oder_by=name,age desc,created_at asc\nIn that case, 'name' will get the default 'ascending' order."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "UpdateIteration is used to mark an iteration \"complete\", once all builds are complete.\nTo make build-specific updates for builds within the iteration, use the UpdateBuild endpoint.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/iterations/:iteration_id",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "iteration_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the iteration. This was created and set by the\nHCP Packer registry when the iteration was created."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "UpdateIteration is used to mark an iteration \"complete\", once all builds are complete.\nTo make build-specific updates for builds within the iteration, use the UpdateBuild endpoint."
+        },
+        {
+          "info": {
+            "name": "DeleteIteration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/iterations/:iteration_id",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "iteration_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the iteration. This was created and set by the\nHCP Packer registry when the iteration was created."
+              },
+              {
+                "name": "location.region.provider",
+                "value": "",
+                "type": "query",
+                "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\")."
+              },
+              {
+                "name": "location.region.region",
+                "value": "",
+                "type": "query",
+                "description": "region is the cloud region (\"us-west1\", \"us-east1\")."
+              },
+              {
+                "name": "bucket_slug",
+                "value": "",
+                "type": "query",
+                "description": "Human-readable name for the bucket."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetRegistry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/registry",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              },
+              {
+                "name": "location.region.provider",
+                "value": "",
+                "type": "query",
+                "description": "provider is the named cloud provider (\"aws\", \"gcp\", \"azure\")."
+              },
+              {
+                "name": "location.region.region",
+                "value": "",
+                "type": "query",
+                "description": "region is the cloud region (\"us-west1\", \"us-east1\")."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "CreateRegistry",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "//api.cloud.hashicorp.com/packer/2021-04-30/organizations/:location.organization_id/projects/:location.project_id/registry",
+            "params": [
+              {
+                "name": "location.organization_id",
+                "value": "",
+                "type": "path",
+                "description": "organization_id is the id of the organization."
+              },
+              {
+                "name": "location.project_id",
+                "value": "",
+                "type": "path",
+                "description": "project_id is the projects id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
