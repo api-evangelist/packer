@@ -52,6 +52,10 @@ apis:
       - type: StatusPage
         url: https://status.hashicorp.com
 common:
+  - type: DomainSecurity
+    url: security/packer-domain-security.yml
+  - type: Authentication
+    url: authentication/packer-authentication.yml
   - type: Website
     url: https://www.packer.io/
   - type: Documentation

@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/packer-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: bearer
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'Authentication token, prefixed by Bearer: Bearer <token>'
+  sources:
+  - openapi/packer-openapi.yml
