@@ -52,6 +52,8 @@ apis:
       - type: StatusPage
         url: https://status.hashicorp.com
 common:
+  - type: AgenticAccess
+    url: agentic-access/packer-agentic-access.yml
   - type: DomainSecurity
     url: security/packer-domain-security.yml
   - type: Authentication
