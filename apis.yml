@@ -5,9 +5,22 @@ description: >-
   source configuration. It automates the creation of pre-configured virtual machine and container images. HCP Packer
   adds a hosted artifact registry with a REST API for tracking image metadata, versions, channels, and security signals.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/packer.png
 tags:
   - Automation
   - DevOps
@@ -19,38 +32,35 @@ created: '2026-03-16'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: packer:packer
-    name: Packer
-    description: Open-source tool for creating identical machine images for multiple platforms from a single source configuration.
-    humanURL: https://www.packer.io/
-    tags:
-      - Automation
-      - DevOps
-      - Infrastructure as Code
-    properties:
-      - type: Documentation
-        url: https://developer.hashicorp.com/packer/docs
-      - type: GettingStarted
-        url: https://developer.hashicorp.com/packer/tutorials
-  - aid: packer:hcp-packer-artifact-registry
-    name: HCP Packer Artifact Registry API
-    description: >-
-      REST API for managing Packer artifacts in the HashiCorp Cloud Platform Packer Artifact Registry, including
-      buckets, versions, builds, channels, packages, SBOMs, vulnerabilities, and registry configuration.
-    humanURL: https://developer.hashicorp.com/hcp/api-docs/packer
-    baseURL: https://api.cloud.hashicorp.com
-    tags:
-      - Artifact Registry
-      - HCP
-      - Image Building
-      - Infrastructure as Code
-    properties:
-      - type: Documentation
-        url: https://developer.hashicorp.com/hcp/api-docs/packer
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/packer/refs/heads/main/openapi/packer-openapi.yml
-      - type: StatusPage
-        url: https://status.hashicorp.com
+- aid: packer:packer
+  name: Packer
+  description: >-
+    Open-source tool for creating identical machine images for multiple platforms from a single source
+    configuration.
+  humanURL: https://www.packer.io/
+  tags:
+  - Automation
+  - DevOps
+  - Infrastructure as Code
+  properties:
+  - type: Documentation
+    url: https://developer.hashicorp.com/packer/docs
+  - type: GettingStarted
+    url: https://developer.hashicorp.com/packer/tutorials
+- aid: packer:packer-packerservice-api
+  name: Packer PackerService API
+  description: The PackerService API from Packer — 13 operation(s) for packerservice.
+  humanURL: https://www.packer.io/
+  baseURL: https://api.cloud.hashicorp.com
+  tags:
+  - PackerService
+  properties:
+  - type: OpenAPI
+    url: openapi/packer-packerservice-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hashicorp.com/hcp/api-docs/packer
+  - type: StatusPage
+    url: https://status.hashicorp.com
 common:
   - type: AgenticAccess
     url: agentic-access/packer-agentic-access.yml
