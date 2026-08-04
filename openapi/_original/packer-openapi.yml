@@ -1,0 +1,2361 @@
+openapi: 3.0.0
+info:
+  title: HashiCorp Cloud Platform Packer Artifact Registry
+  description: API for managing Packer images.
+  version: '2021-04-30'
+paths:
+  /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/builds/{build_id}:
+    get:
+      operationId: GetBuild
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.GetBuildResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: build_id
+        description: 'Unique identifier of the build that should be retrieved; this ID was
+
+          created and set by the HCP Packer registry when the build was created.'
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.region.provider
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: location.region.region
+        description: region is the cloud region ("us-west1", "us-east1").
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - PackerService
+    delete:
+      operationId: DeleteBuild
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.DeleteBuildResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: build_id
+        description: 'Unique identifier of the build that should be deleted; this ID was
+
+          created and set by the HCP Packer registry when the build was created.'
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.region.provider
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: location.region.region
+        description: region is the cloud region ("us-west1", "us-east1").
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - PackerService
+    patch:
+      operationId: UpdateBuild
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.UpdateBuildResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: build_id
+        description: 'Unique identifier of the build that should be updated; this ID was
+
+          created and set by the HCP Packer registry when the build was created.'
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hashicorp.cloud.packer.UpdateBuildRequest'
+        required: true
+      tags:
+      - PackerService
+  /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images:
+    get:
+      operationId: ListBuckets
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.ListBucketsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.region.provider
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: location.region.region
+        description: region is the cloud region ("us-west1", "us-east1").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pagination.page_size
+        description: 'The max number of results per page that should be returned. If the number
+
+          of available results is larger than `page_size`, a `next_page_token` is
+
+          returned which can be used to get the next page of results in subsequent
+
+          requests. A value of zero will cause `page_size` to be defaulted.'
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: pagination.next_page_token
+        description: 'Specifies a page token to use to retrieve the next page. Set this to the
+
+          `next_page_token` returned by previous list requests to get the next page of
+
+          results. If set, `previous_page_token` must not be set.'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pagination.previous_page_token
+        description: 'Specifies a page token to use to retrieve the previous page. Set this to
+
+          the `previous_page_token` returned by previous list requests to get the
+
+          previous page of results. If set, `next_page_token` must not be set.'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sorting.order_by
+        description: "Specifies the list of per field ordering that should be used for sorting. \nThe order matters as rows\
+          \ are sorted in order by fields and when the field\nmatches, the next field is used to tie break the ordering.\n\
+          The per field default ordering is ascending.  \n\nThe fields should be immutabile, unique, and orderable. If the\
+          \ field is\nnot unique, more than one sort fields should be passed.\n\nExample: oder_by=name,age desc,created_at\
+          \ asc\nIn that case, 'name' will get the default 'ascending' order."
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      tags:
+      - PackerService
+    put:
+      operationId: CreateBucket
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.CreateBucketResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hashicorp.cloud.packer.CreateBucketRequest'
+        required: true
+      tags:
+      - PackerService
+  /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}:
+    get:
+      operationId: GetBucket
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.GetBucketResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bucket_slug
+        description: Human-readable name for the bucket.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.region.provider
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: location.region.region
+        description: region is the cloud region ("us-west1", "us-east1").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: bucket_id
+        description: 'Unique identifier of the bucket; created and set by the HCP Packer
+
+          registry when the bucket is created.'
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - PackerService
+    delete:
+      operationId: DeleteBucket
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.DeleteBucketResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bucket_slug
+        description: Human-readable name for the bucket.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.region.provider
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: location.region.region
+        description: region is the cloud region ("us-west1", "us-east1").
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - PackerService
+    patch:
+      operationId: UpdateBucket
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.UpdateBucketResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bucket_slug
+        description: Human-readable name for the bucket.
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hashicorp.cloud.packer.UpdateBucketRequest'
+        required: true
+      tags:
+      - PackerService
+  /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels:
+    get:
+      operationId: ListChannels
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.ListChannelsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bucket_slug
+        description: Human-readable name for the bucket you want to list channels for.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.region.provider
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: location.region.region
+        description: region is the cloud region ("us-west1", "us-east1").
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - PackerService
+    post:
+      operationId: CreateChannel
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.CreateChannelResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bucket_slug
+        description: Human-readable name for the bucket to associate the channel with.
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hashicorp.cloud.packer.CreateChannelRequest'
+        required: true
+      tags:
+      - PackerService
+  ? /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/channels/{slug}
+  : get:
+      operationId: GetChannel
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.GetChannelResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bucket_slug
+        description: Human-readable name for the bucket that the channel is associated with.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: slug
+        description: Human-readable name for the channel.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.region.provider
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: location.region.region
+        description: region is the cloud region ("us-west1", "us-east1").
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - PackerService
+    delete:
+      operationId: DeleteChannel
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.DeleteChannelResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bucket_slug
+        description: Human-readable name for the bucket that the channel is associated with.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: slug
+        description: Human-readable name for the channel.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.region.provider
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: location.region.region
+        description: region is the cloud region ("us-west1", "us-east1").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: revocation_message
+        description: 'Optional field to provide the reason for why this channel is being revoked.
+
+          Only useful for a channel that is assigned to an iteration.'
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - PackerService
+    patch:
+      operationId: UpdateChannel
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.UpdateChannelResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bucket_slug
+        description: Human-readable name for the bucket that the channel is associated with.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: slug
+        description: Human-readable name for the channel.
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hashicorp.cloud.packer.UpdateChannelRequest'
+        required: true
+      tags:
+      - PackerService
+  /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iteration:
+    get:
+      summary: "GetIteration allows the user to retrieve an iteration using one of the following identifiers:\n * iteration_id\n\
+        \ * incremental_version\n * fingerprint"
+      description: 'These are supplied as a query parameter. For example:
+
+        images/{bucket_slug}/iteration?fingerprint={fingerprint}
+
+
+        bucket_slug must always be set because it is possible for iterations to
+
+        have the same incremental_version or fingerprint across buckets'
+      operationId: GetIteration
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.GetIterationResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bucket_slug
+        description: Human-readable name for the bucket.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.region.provider
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: location.region.region
+        description: region is the cloud region ("us-west1", "us-east1").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: incremental_version
+        description: The human-readable version number assigned to this iteration.
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: iteration_id
+        description: 'Unique identifier of the iteration. This was created and set by the
+
+          HCP Packer registry when the iteration was created.'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fingerprint
+        description: 'Fingerprint of the iteration. The fingerprint is set by Packer when you
+
+          call `packer build`. It will most often correspond to a git commit sha,
+
+          but can be manually overridden by setting the environment variable
+
+          `HCP_PACKER_BUILD_FINGERPRINT`.'
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - PackerService
+  /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations:
+    get:
+      operationId: ListIterations
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.ListIterationsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bucket_slug
+        description: Human-readable name for the bucket.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.region.provider
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: location.region.region
+        description: region is the cloud region ("us-west1", "us-east1").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: include_incomplete
+        description: 'If true, the request will return information about iterations that have
+
+          not been marked "complete". By default, this is false and the list
+
+          request will only return information about "complete" iterations that are
+
+          ready for use.'
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: pagination.page_size
+        description: 'The max number of results per page that should be returned. If the number
+
+          of available results is larger than `page_size`, a `next_page_token` is
+
+          returned which can be used to get the next page of results in subsequent
+
+          requests. A value of zero will cause `page_size` to be defaulted.'
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: pagination.next_page_token
+        description: 'Specifies a page token to use to retrieve the next page. Set this to the
+
+          `next_page_token` returned by previous list requests to get the next page of
+
+          results. If set, `previous_page_token` must not be set.'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pagination.previous_page_token
+        description: 'Specifies a page token to use to retrieve the previous page. Set this to
+
+          the `previous_page_token` returned by previous list requests to get the
+
+          previous page of results. If set, `next_page_token` must not be set.'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sorting.order_by
+        description: "Specifies the list of per field ordering that should be used for sorting. \nThe order matters as rows\
+          \ are sorted in order by fields and when the field\nmatches, the next field is used to tie break the ordering.\n\
+          The per field default ordering is ascending.  \n\nThe fields should be immutabile, unique, and orderable. If the\
+          \ field is\nnot unique, more than one sort fields should be passed.\n\nExample: oder_by=name,age desc,created_at\
+          \ asc\nIn that case, 'name' will get the default 'ascending' order."
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      tags:
+      - PackerService
+    post:
+      operationId: CreateIteration
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.CreateIterationResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bucket_slug
+        description: Human-readable name for the bucket.
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hashicorp.cloud.packer.CreateIterationRequest'
+        required: true
+      tags:
+      - PackerService
+  ? /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/ancestors
+  : get:
+      summary: API Endpoints to ease UI implementation
+      operationId: GetAncestorImages
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.GetAncestorImagesResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bucket_slug
+        description: Human-readable name for the bucket.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: incremental_version
+        description: The human-readable version number assigned to this iteration.
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: location.region.provider
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: location.region.region
+        description: region is the cloud region ("us-west1", "us-east1").
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - PackerService
+  ? /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{incremental_version}/children
+  : get:
+      operationId: GetChildImages
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.GetChildImagesResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bucket_slug
+        description: Human-readable name for the bucket.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: incremental_version
+        description: The human-readable version number assigned to this iteration.
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: location.region.provider
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: location.region.region
+        description: region is the cloud region ("us-west1", "us-east1").
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - PackerService
+  ? /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}
+  : post:
+      operationId: CreateBuild
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.CreateBuildResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bucket_slug
+        description: Human-readable name for the bucket.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: iteration_id
+        description: 'Unique identifier of the iteration that this build should be associated
+
+          with.'
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hashicorp.cloud.packer.CreateBuildRequest'
+        required: true
+      tags:
+      - PackerService
+  ? /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/images/{bucket_slug}/iterations/{iteration_id}/builds
+  : get:
+      operationId: ListBuilds
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.ListBuildsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bucket_slug
+        description: Human-readable name for the bucket to list builds for.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: iteration_id
+        description: 'Unique identifier of the iteration to list builds for; this was
+
+          created and set by the HCP Packer registry when the iteration was created.'
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.region.provider
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: location.region.region
+        description: region is the cloud region ("us-west1", "us-east1").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pagination.page_size
+        description: 'The max number of results per page that should be returned. If the number
+
+          of available results is larger than `page_size`, a `next_page_token` is
+
+          returned which can be used to get the next page of results in subsequent
+
+          requests. A value of zero will cause `page_size` to be defaulted.'
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: pagination.next_page_token
+        description: 'Specifies a page token to use to retrieve the next page. Set this to the
+
+          `next_page_token` returned by previous list requests to get the next page of
+
+          results. If set, `previous_page_token` must not be set.'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pagination.previous_page_token
+        description: 'Specifies a page token to use to retrieve the previous page. Set this to
+
+          the `previous_page_token` returned by previous list requests to get the
+
+          previous page of results. If set, `next_page_token` must not be set.'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sorting.order_by
+        description: "Specifies the list of per field ordering that should be used for sorting. \nThe order matters as rows\
+          \ are sorted in order by fields and when the field\nmatches, the next field is used to tie break the ordering.\n\
+          The per field default ordering is ascending.  \n\nThe fields should be immutabile, unique, and orderable. If the\
+          \ field is\nnot unique, more than one sort fields should be passed.\n\nExample: oder_by=name,age desc,created_at\
+          \ asc\nIn that case, 'name' will get the default 'ascending' order."
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      tags:
+      - PackerService
+  /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/iterations/{iteration_id}:
+    delete:
+      operationId: DeleteIteration
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.DeleteIterationResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: iteration_id
+        description: 'Unique identifier of the iteration. This was created and set by the
+
+          HCP Packer registry when the iteration was created.'
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.region.provider
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: location.region.region
+        description: region is the cloud region ("us-west1", "us-east1").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: bucket_slug
+        description: Human-readable name for the bucket.
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - PackerService
+    patch:
+      summary: 'UpdateIteration is used to mark an iteration "complete", once all builds are complete.
+
+        To make build-specific updates for builds within the iteration, use the UpdateBuild endpoint.'
+      operationId: UpdateIteration
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.UpdateIterationResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: iteration_id
+        description: 'Unique identifier of the iteration. This was created and set by the
+
+          HCP Packer registry when the iteration was created.'
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hashicorp.cloud.packer.UpdateIterationRequest'
+        required: true
+      tags:
+      - PackerService
+  /packer/2021-04-30/organizations/{location.organization_id}/projects/{location.project_id}/registry:
+    get:
+      operationId: GetRegistry
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.GetRegistryResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.region.provider
+        description: provider is the named cloud provider ("aws", "gcp", "azure").
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: location.region.region
+        description: region is the cloud region ("us-west1", "us-east1").
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - PackerService
+    put:
+      operationId: CreateRegistry
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hashicorp.cloud.packer.CreateRegistryResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grpc.gateway.runtime.Error'
+      parameters:
+      - name: location.organization_id
+        description: organization_id is the id of the organization.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location.project_id
+        description: project_id is the projects id.
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/hashicorp.cloud.packer.CreateRegistryRequest'
+        required: true
+      tags:
+      - PackerService
+security:
+- bearer: []
+servers:
+- url: //api.cloud.hashicorp.com
+components:
+  securitySchemes:
+    bearer:
+      type: apiKey
+      description: 'Authentication token, prefixed by Bearer: Bearer <token>'
+      name: Authorization
+      in: header
+  schemas:
+    google.protobuf.Any:
+      type: object
+      properties:
+        type_url:
+          type: string
+          description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message.\
+            \ This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\n\
+            the fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical\
+            \ form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types\
+            \ that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`,\
+            \ or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\
+            \n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n\
+            \  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n\
+            \  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to\
+            \ be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this\
+            \ functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs\
+            \ beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\n\
+            used with implementation specific semantics."
+        value:
+          type: string
+          format: byte
+          description: Must be a valid serialized protocol buffer of the above specified type.
+      description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type\
+        \ of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility\
+        \ functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n \
+        \   Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\
+        \nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n   \
+        \ if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in\
+        \ Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n   \
+        \   any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any,\
+        \ err := ptypes.MarshalAny(foo)\n     ...\n     foo := &pb.Foo{}\n     if err := ptypes.UnmarshalAny(any, foo); err\
+        \ != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name'\
+        \ as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL,\
+        \ for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an\
+        \ `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type`\
+        \ which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name\
+        \ = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\"\
+        ,\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known\
+        \ and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds\
+        \ the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n\
+        \      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
+    google.rpc.Status:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: 'The status code, which should be an enum value of
+
+            [google.rpc.Code][google.rpc.Code].'
+        message:
+          type: string
+          description: 'A developer-facing error message, which should be in English. Any
+
+            user-facing error message should be localized and sent in the
+
+            [google.rpc.Status.details][google.rpc.Status.details] field, or localized
+
+            by the client.'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.protobuf.Any'
+          description: 'A list of messages that carry the error details.  There is a common set of
+
+            message types for APIs to use.'
+      description: "- Simple to use and understand for most users\n- Flexible enough to meet unexpected needs\n\n# Overview\n\
+        \nThe `Status` message contains three pieces of data: error code, error\nmessage, and error details. The error code\
+        \ should be an enum value of\n[google.rpc.Code][google.rpc.Code], but it may accept additional error codes\nif needed.\
+        \  The error message should be a developer-facing English message\nthat helps developers *understand* and *resolve*\
+        \ the error. If a localized\nuser-facing error message is needed, put the localized message in the error\ndetails\
+        \ or localize it in the client. The optional error details may contain\narbitrary information about the error. There\
+        \ is a predefined set of error\ndetail types in the package `google.rpc` that can be used for common error\nconditions.\n\
+        \n# Language mapping\n\nThe `Status` message is the logical representation of the error model, but it\nis not necessarily\
+        \ the actual wire format. When the `Status` message is\nexposed in different client libraries and different wire protocols,\
+        \ it can be\nmapped differently. For example, it will likely be mapped to some exceptions\nin Java, but more likely\
+        \ mapped to some error codes in C.\n\n# Other uses\n\nThe error model and the `Status` message can be used in a variety\
+        \ of\nenvironments, either with or without APIs, to provide a\nconsistent developer experience across different environments.\n\
+        \nExample uses of this error model include:\n\n- Partial errors. If a service needs to return partial errors to the\
+        \ client,\n    it may embed the `Status` in the normal response to indicate the partial\n    errors.\n\n- Workflow\
+        \ errors. A typical workflow has multiple steps. Each step may\n    have a `Status` message for error reporting.\n\
+        \n- Batch operations. If a client uses batch request and batch response, the\n    `Status` message should be used\
+        \ directly inside batch response, one for\n    each error sub-response.\n\n- Asynchronous operations. If an API call\
+        \ embeds asynchronous operation\n    results in its response, the status of those operations should be\n    represented\
+        \ directly using the `Status` message.\n\n- Logging. If some API errors are stored in logs, the message `Status` could\n\
+        \    be used directly after any stripping needed for security/privacy reasons."
+      title: 'The `Status` type defines a logical error model that is suitable for
+
+        different programming environments, including REST APIs and RPC APIs. It is
+
+        used by [gRPC](https://github.com/grpc). The error model is designed to be:'
+    grpc.gateway.runtime.Error:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/google.protobuf.Any'
+    hashicorp.cloud.common.PaginationRequest:
+      type: object
+      properties:
+        page_size:
+          type: integer
+          format: int64
+          description: 'The max number of results per page that should be returned. If the number
+
+            of available results is larger than `page_size`, a `next_page_token` is
+
+            returned which can be used to get the next page of results in subsequent
+
+            requests. A value of zero will cause `page_size` to be defaulted.'
+        next_page_token:
+          type: string
+          description: 'Specifies a page token to use to retrieve the next page. Set this to the
+
+            `next_page_token` returned by previous list requests to get the next page of
+
+            results. If set, `previous_page_token` must not be set.'
+        previous_page_token:
+          type: string
+          description: 'Specifies a page token to use to retrieve the previous page. Set this to
+
+            the `previous_page_token` returned by previous list requests to get the
+
+            previous page of results. If set, `next_page_token` must not be set.'
+      description: PaginationRequest are the parameters for a paginated list request.
+    hashicorp.cloud.common.PaginationResponse:
+      type: object
+      properties:
+        next_page_token:
+          type: string
+          description: 'This token allows you to get the next page of results for list requests.
+
+            If the number of results is larger than `page_size`, use the
+
+            `next_page_token` as a value for the query parameter `next_page_token` in
+
+            the next request. The value will become empty when there are no more pages.'
+        previous_page_token:
+          type: string
+          description: 'This token allows you to get the previous page of results for list
+
+            requests. If the number of results is larger than `page_size`, use the
+
+            `previous_page_token` as a value for the query parameter
+
+            `previous_page_token` in the next request. The value will become empty when
+
+            there are no more pages.'
+      description: 'PaginationResponse is the response holding the page tokens for a paginated
+
+        list response.'
+    hashicorp.cloud.common.SortingRequest:
+      type: object
+      properties:
+        order_by:
+          type: array
+          items:
+            type: string
+          description: "Specifies the list of per field ordering that should be used for sorting. \nThe order matters as rows\
+            \ are sorted in order by fields and when the field\nmatches, the next field is used to tie break the ordering.\n\
+            The per field default ordering is ascending.  \n\nThe fields should be immutabile, unique, and orderable. If the\
+            \ field is\nnot unique, more than one sort fields should be passed.\n\nExample: oder_by=name,age desc,created_at\
+            \ asc\nIn that case, 'name' will get the default 'ascending' order."
+      description: SortingRequest are the parameters for a sorted list request.
+    hashicorp.cloud.location.Link:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'type is the unique type of the resource. Each service publishes a
+
+            unique set of types. The type value is recommended to be formatted
+
+            in "<org>.<type>" such as "hashicorp.hvn". This is to prevent conflicts
+
+            in the future, but any string value will work.'
+        id:
+          type: string
+          description: id is the identifier for this resource.
+        uuid:
+          type: string
+          description: uuid is the unique UUID for this resource.
+        location:
+          $ref: '#/components/schemas/hashicorp.cloud.location.Location'
+        description:
+          type: string
+          description: 'description is a human-friendly description for this link. This is
+
+            used primarily for informational purposes such as error messages.'
+      description: 'Link is used to uniquely reference any resource within HashiCorp Cloud.
+
+        This can be conceptually considered a "foreign key".'
+    hashicorp.cloud.location.Location:
+      type: object
+      properties:
+        organization_id:
+          type: string
+          description: organization_id is the id of the organization.
+        project_id:
+          type: string
+          description: project_id is the projects id.
+        region:
+          $ref: '#/components/schemas/hashicorp.cloud.location.Region'
+      description: Location represents a target for an operation in HCP.
+    hashicorp.cloud.location.Region:
+      type: object
+      properties:
+        provider:
+          type: string
+          title: provider is the named cloud provider ("aws", "gcp", "azure")
+        region:
+          type: string
+          title: region is the cloud region ("us-west1", "us-east1")
+      description: Region identifies a Cloud data-plane region.
+    hashicorp.cloud.operation.Operation:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'id is the unique ID for this operation used in other RPC calls.
+
+            This ID is only guaranteed to be unique within the region that
+
+            the operation is running in.'
+        state:
+          $ref: '#/components/schemas/hashicorp.cloud.operation.Operation.State'
+        error:
+          $ref: '#/components/schemas/google.rpc.Status'
+        response:
+          $ref: '#/components/schemas/google.protobuf.Any'
+        location:
+          $ref: '#/components/schemas/hashicorp.cloud.location.Location'
+        link:
+          $ref: '#/components/schemas/hashicorp.cloud.location.Link'
+        created_at:
+          type: string
+          format: date-time
+          description: CreatedAt is the timestamp of when the operation was first created.
+        updated_at:
+          type: string
+          format: date-time
+          description: UpdatedAt is the timestamp of when the operation was last updated.
+      description: Operation represents a single operation.
+    hashicorp.cloud.operation.Operation.State:
+      type: string
+      enum:
+      - PENDING
+      - RUNNING
+      - DONE
+      - QUEUED
+      default: PENDING
+      description: 'State is one of the states that an Operation can be in.
+
+
+        The states are purposely coarse grained to make it easy to understand
+
+        the operation state machine: pending => running => done. Or pending =>
+
+        queued => running => done. No other state transitions are possible.
+
+        Success/failure can be determined based on the result oneof.'
+    hashicorp.cloud.packer.Bucket:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique identifier of the bucket; created and set by the HCP Packer
+
+            registry when the bucket is created.'
+        slug:
+          type: string
+          description: Human-readable name for the bucket.
+        location:
+          $ref: '#/components/schemas/hashicorp.cloud.location.Location'
+        latest_iteration:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.Iteration'
+        latest_version:
+          type: integer
+          format: int32
+          description: 'The human-readable version of the most recent completed iteration in
+
+            this bucket.'
+        created_at:
+          type: string
+          format: date-time
+          description: When the bucket was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: When the bucket was last updated.
+        platforms:
+          type: array
+          items:
+            type: string
+          description: 'A list of which cloud providers or other platforms the bucket contains
+
+            builds for. For example, AWS, GCP, or Azure.'
+        description:
+          type: string
+          description: A short description of what this bucket's images are for.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: A key:value map for custom, user-settable metadata about your bucket.
+        iteration_count:
+          type: string
+          format: int64
+          description: The total number of iterations in this bucket.
+    hashicorp.cloud.packer.Build:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique identifier of the build; created and set by the HCP Packer
+
+            registry when the build is created.'
+        iteration_id:
+          type: string
+          description: 'Unique identifier of the iteration associated with this build; this was
+
+            created and set by the HCP Packer registry when the iteration was created.'
+        component_type:
+          type: string
+          title: 'Internal Packer name for the builder or post-processor component used to
+
+            build this. For example, "amazon-ebs" or "azure-arm"'
+        packer_run_uuid:
+          type: string
+          description: 'The UUID specific to this call to Packer build. If you use the manifest
+
+            post-processor, this UUID will match the UUID present there.'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/hashicorp.cloud.packer.Image'
+          description: List of images associated with this build.
+        cloud_provider:
+          type: string
+          description: 'The cloud provider that this build produced artifacts for.
+
+            For example, AWS, GCP, or Azure.'
+        status:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.BuildStatus'
+        created_at:
+          type: string
+          format: date-time
+          description: When the build was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: When the build was most recently updated.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: A key:value map for custom, user-settable metadata about your build.
+    hashicorp.cloud.packer.BuildCreateBody:
+      type: object
+      properties:
+        component_type:
+          type: string
+          title: 'Internal Packer name for the builder or post-processor component used to
+
+            build this. For example, "amazon-ebs" or "azure-arm"'
+        packer_run_uuid:
+          type: string
+          description: 'The UUID specific to this call to Packer build. If you use the manifest
+
+            post-processor, this UUID will match the UUID present there.'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/hashicorp.cloud.packer.ImageCreateBody'
+          description: List of images associated with this build.
+        cloud_provider:
+          type: string
+          description: 'The cloud provider that this build produced artifacts for.
+
+            For example, AWS, GCP, or Azure.'
+        status:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.BuildStatus'
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: A key:value map for custom, user-settable metadata about your build.
+      description: 'This message is used for build/create calls; it removes elements from the
+
+        Build message that the user cannot set.'
+    hashicorp.cloud.packer.BuildStatus:
+      type: string
+      enum:
+      - UNSET
+      - RUNNING
+      - DONE
+      - CANCELLED
+      - FAILED
+      default: UNSET
+      title: "- UNSET: UNSET is a sentinel zero value so that an uninitialized value can be\ndetected.\n - RUNNING: Running\
+        \ means the Packer build is currently running\n - DONE: Done means the Packer build has finished successfully\n -\
+        \ CANCELLED: Cancelled means the Packer build was cancelled by a user\n - FAILED: Failed means the Packer build failed\
+        \ and therefore image creation failed"
+    hashicorp.cloud.packer.BuildUpdates:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.BuildStatus'
+        cloud_provider:
+          type: string
+          description: 'The cloud provider that this build produced artifacts for.
+
+            For example, AWS, GCP, or Azure.'
+        packer_run_uuid:
+          type: string
+          description: 'The UUID specific to this call to Packer build. If you use the manifest
+
+            post-processor, this UUID will match the UUID present there.'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/hashicorp.cloud.packer.ImageCreateBody'
+          description: A list of images to create and associate with this build.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: A key:value map for custom, user-settable metadata about your build.
+      description: 'BuildUpdates is used to group the elements of a Build that are
+
+        allowed to be updated after the build has been created. It is part of the
+
+        UpdateBuildRequest.'
+    hashicorp.cloud.packer.Channel:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique identifier of the channel. This ID is created and set by the HCP
+
+            Packer registry when the channel is created.'
+        slug:
+          type: string
+          description: Human-readable name for the channel.
+        bucket_slug:
+          type: string
+          description: Human-readable name for the bucket this channel is associated with.
+        author_id:
+          type: string
+          title: The author who created the channel
+        created_at:
+          type: string
+          format: date-time
+          description: When the channel was created.
+        revoked_at:
+          type: string
+          format: date-time
+          description: When the channel was revoked, if it has been revoked.
+        revocation_message:
+          type: string
+          description: A short explanation of why this channel was revoked.
+        pointer:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.ChannelIterationPointer'
+    hashicorp.cloud.packer.ChannelIterationPointer:
+      type: object
+      properties:
+        iteration:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.Iteration'
+        author_id:
+          type: string
+          title: The author who pointed the channel to the iteration
+        created_at:
+          type: string
+          format: date-time
+          description: When the channel pointer was created.
+      description: 'A Channel Pointer is a special object that tracks channel
+
+        history by storing both which iteration the channel points to and also when
+
+        the channel was updated to point at said iteration.'
+    hashicorp.cloud.packer.CreateBucketRequest:
+      type: object
+      properties:
+        bucket_slug:
+          type: string
+          description: Human-readable name for the bucket.
+        description:
+          type: string
+          description: A short description of what this bucket's images are for.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: A key:value map for custom, user-settable metadata about your bucket.
+        location:
+          $ref: '#/components/schemas/hashicorp.cloud.location.Location'
+    hashicorp.cloud.packer.CreateBucketResponse:
+      type: object
+      properties:
+        bucket:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.Bucket'
+    hashicorp.cloud.packer.CreateBuildRequest:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/hashicorp.cloud.location.Location'
+        bucket_slug:
+          type: string
+          description: Human-readable name for the bucket.
+        build:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.BuildCreateBody'
+        fingerprint:
+          type: string
+          title: 'Fingerprint of the iteration. The fingerprint is set by Packer when you
+
+            call `packer build`. It will most often correspond to a git commit sha,
+
+            but can be manually overridden by setting the environment variable
+
+            `HCP_PACKER_BUILD_FINGERPRINT`'
+        iteration_id:
+          type: string
+          description: 'Unique identifier of the iteration that this build should be associated
+
+            with.'
+    hashicorp.cloud.packer.CreateBuildResponse:
+      type: object
+      properties:
+        build:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.Build'
+    hashicorp.cloud.packer.CreateChannelRequest:
+      type: object
+      properties:
+        slug:
+          type: string
+          description: Human-readable name for the channel.
+        bucket_slug:
+          type: string
+          description: Human-readable name for the bucket to associate the channel with.
+        incremental_version:
+          type: integer
+          format: int32
+          description: The human-readable version number assigned to this iteration.
+        iteration_id:
+          type: string
+          description: 'Unique identifier of the iteration. This was created and set by the
+
+            HCP Packer registry when the iteration was created.'
+        fingerprint:
+          type: string
+          title: 'Fingerprint of the iteration. The fingerprint is set by Packer when you
+
+            call `packer build`. It will most often correspond to a git commit sha,
+
+            but can be manually overridden by setting the environment variable
+
+            `HCP_PACKER_BUILD_FINGERPRINT`'
+        location:
+          $ref: '#/components/schemas/hashicorp.cloud.location.Location'
+    hashicorp.cloud.packer.CreateChannelResponse:
+      type: object
+      properties:
+        channel:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.Channel'
+    hashicorp.cloud.packer.CreateIterationRequest:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/hashicorp.cloud.location.Location'
+        bucket_slug:
+          type: string
+          description: Human-readable name for the bucket.
+        fingerprint:
+          type: string
+          title: 'Fingerprint of the iteration. The fingerprint is set by Packer when you
+
+            call `packer build`. It will most often correspond to a git commit sha,
+
+            but can be manually overridden by setting the environment variable
+
+            `HCP_PACKER_BUILD_FINGERPRINT`'
+    hashicorp.cloud.packer.CreateIterationResponse:
+      type: object
+      properties:
+        iteration:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.Iteration'
+    hashicorp.cloud.packer.CreateRegistryRequest:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/hashicorp.cloud.location.Location'
+        feature_tier:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.RegistryConfig.Tier'
+    hashicorp.cloud.packer.CreateRegistryResponse:
+      type: object
+      properties:
+        registry:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.Registry'
+        operation:
+          $ref: '#/components/schemas/hashicorp.cloud.operation.Operation'
+    hashicorp.cloud.packer.DeleteBucketResponse:
+      type: object
+    hashicorp.cloud.packer.DeleteBuildResponse:
+      type: object
+    hashicorp.cloud.packer.DeleteChannelResponse:
+      type: object
+    hashicorp.cloud.packer.DeleteIterationResponse:
+      type: object
+    hashicorp.cloud.packer.GetAncestorImagesResponse:
+      type: object
+      properties:
+        ancestors:
+          type: array
+          items:
+            $ref: '#/components/schemas/hashicorp.cloud.packer.Iteration'
+    hashicorp.cloud.packer.GetBucketResponse:
+      type: object
+      properties:
+        bucket:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.Bucket'
+    hashicorp.cloud.packer.GetBuildResponse:
+      type: object
+      properties:
+        build:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.Build'
+    hashicorp.cloud.packer.GetChannelResponse:
+      type: object
+      properties:
+        channel:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.Channel'
+    hashicorp.cloud.packer.GetChildImagesResponse:
+      type: object
+      properties:
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/hashicorp.cloud.packer.Iteration'
+    hashicorp.cloud.packer.GetIterationResponse:
+      type: object
+      properties:
+        iteration:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.Iteration'
+    hashicorp.cloud.packer.GetRegistryResponse:
+      type: object
+      properties:
+        registry:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.Registry'
+    hashicorp.cloud.packer.Image:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique identifier for the image; created and set by the HCP Packer
+
+            registry when the image is created.'
+        image_id:
+          type: string
+          title: 'ID or URL of the remote cloud image as given by a build. For example,
+
+            ami-12345'
+        region:
+          type: string
+          description: 'Cloud-specific region as provided by `packer build`. For example,
+
+            "ap-east-1".'
+        created_at:
+          type: string
+          format: date-time
+          title: Timestamp at which this image was created
+      description: 'Represents the actual region:image_id mapping for a single image, in a
+
+        single build.'
+    hashicorp.cloud.packer.ImageCreateBody:
+      type: object
+      properties:
+        image_id:
+          type: string
+          description: ID or URL of the remote cloud image as given by a build.
+        region:
+          type: string
+          description: 'Cloud-specific region as provided by `packer build`. For example,
+
+            "ap-east-1".'
+      description: 'This message is used for build/create calls; it removes elements from the
+
+        Image message that the user cannot set.'
+    hashicorp.cloud.packer.Iteration:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique identifier of the iteration; created and set by the HCP Packer
+
+            registry when the iteration is created.'
+        bucket_slug:
+          type: string
+          description: Human-readable name for the bucket that this iteration is associated with.
+        iteration_ancestor_id:
+          type: string
+          description: 'The unique identifier of the iteration that was used as a source
+
+            for this iteration, if this iteration was built on a base layer.'
+        incremental_version:
+          type: integer
+          format: int32
+          description: 'The human-readable version number assigned to this iteration. This
+
+            field will only be set if the iteration is "complete".'
+        complete:
+          type: boolean
+          description: 'If true, all builds associated with this iteration have successfully
+
+            completed and uploaded metadata to the registry. When "complete" is true,
+
+            This iteration is considered ready to use, and can have channels assigned
+
+            to it.'
+        author_id:
+          type: string
+          description: The name of the person who created this iteration.
+        created_at:
+          type: string
+          format: date-time
+          description: When the iteration was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: When the iteration was last updated.
+        fingerprint:
+          type: string
+          title: 'Fingerprint of the iteration. The fingerprint is set by Packer when you
+
+            call `packer build`. It will most often correspond to a git commit sha,
+
+            but can be manually overridden by setting the environment variable
+
+            `HCP_PACKER_BUILD_FINGERPRINT`'
+        builds:
+          type: array
+          items:
+            $ref: '#/components/schemas/hashicorp.cloud.packer.Build'
+          description: A list of all the builds associated with this iteration.
+    hashicorp.cloud.packer.IterationforList:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique identifier of the iteration; created and set by the HCP Packer
+
+            registry when the iteration is created.'
+        bucket_slug:
+          type: string
+          description: Human-readable name for the bucket.
+        iteration_ancestor_id:
+          type: string
+          description: 'The unique identifier of the iteration that was used as a source
+
+            for this iteration, if this iteration was built on a base layer.'
+        incremental_version:
+          type: integer
+          format: int32
+          description: 'The human-readable version number assigned to this iteration. This
+
+            field will only be set if the iteration is "complete".'
+        complete:
+          type: boolean
+          description: 'If true, all builds associated with this iteration have successfully
+
+            completed and uploaded metadata to the registry. When "complete" is true,
+
+            This iteration is considered ready to use, and can have channels assigned
+
+            to it.'
+        author_id:
+          type: string
+          description: Who created the iteration.
+        created_at:
+          type: string
+          format: date-time
+          description: When the iteration was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: When the iteration was most recently updated.
+        fingerprint:
+          type: string
+          title: 'Fingerprint of the iteration. The fingerprint is set by Packer when you
+
+            call `packer build`. It will most often correspond to a git commit sha,
+
+            but can be manually overridden by setting the environment variable
+
+            `HCP_PACKER_BUILD_FINGERPRINT`'
+      description: The list endpoint does not return build information.
+    hashicorp.cloud.packer.ListBucketsResponse:
+      type: object
+      properties:
+        buckets:
+          type: array
+          items:
+            $ref: '#/components/schemas/hashicorp.cloud.packer.Bucket'
+          description: List of buckets.
+        pagination:
+          $ref: '#/components/schemas/hashicorp.cloud.common.PaginationResponse'
+    hashicorp.cloud.packer.ListBuildsResponse:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/hashicorp.cloud.location.Location'
+        pagination:
+          $ref: '#/components/schemas/hashicorp.cloud.common.PaginationResponse'
+        builds:
+          type: array
+          items:
+            $ref: '#/components/schemas/hashicorp.cloud.packer.Build'
+          description: The requested list of builds.
+    hashicorp.cloud.packer.ListChannelsResponse:
+      type: object
+      properties:
+        channels:
+          type: array
+          items:
+            $ref: '#/components/schemas/hashicorp.cloud.packer.Channel'
+    hashicorp.cloud.packer.ListIterationsResponse:
+      type: object
+      properties:
+        iterations:
+          type: array
+          items:
+            $ref: '#/components/schemas/hashicorp.cloud.packer.IterationforList'
+          title: The requested list of iterations
+        pagination:
+          $ref: '#/components/schemas/hashicorp.cloud.common.PaginationResponse'
+    hashicorp.cloud.packer.Registry:
+      type: object
+      properties:
+        id:
+          type: string
+          title: ULID of the registry
+        location:
+          $ref: '#/components/schemas/hashicorp.cloud.location.Location'
+        config:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.RegistryConfig'
+        created_at:
+          type: string
+          format: date-time
+          title: When the registry was create
+        updated_at:
+          type: string
+          format: date-time
+          title: When the registry was last updated
+    hashicorp.cloud.packer.RegistryConfig:
+      type: object
+      properties:
+        feature_tier:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.RegistryConfig.Tier'
+        activated:
+          type: boolean
+          description: A Registry is activated when the system correctly starts billing for it.
+      title: The registry configuration
+    hashicorp.cloud.packer.RegistryConfig.Tier:
+      type: string
+      enum:
+      - UNSET
+      - STARTER
+      - STANDARD
+      - PRIVATE_BETA
+      default: UNSET
+    hashicorp.cloud.packer.UpdateBucketRequest:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/hashicorp.cloud.location.Location'
+        bucket_slug:
+          type: string
+          description: Human-readable name for the bucket.
+        platforms:
+          type: array
+          items:
+            type: string
+          description: 'A list of which cloud providers or other platforms the bucket contains
+
+            builds for. For example, AWS, GCP, or Azure.'
+        description:
+          type: string
+          description: A short description of what this bucket's images are for.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: A key:value map for custom, user-settable metadata about your bucket.
+    hashicorp.cloud.packer.UpdateBucketResponse:
+      type: object
+      properties:
+        bucket:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.Bucket'
+    hashicorp.cloud.packer.UpdateBuildRequest:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/hashicorp.cloud.location.Location'
+        build_id:
+          type: string
+          description: 'Unique identifier of the build that should be updated; this ID was
+
+            created and set by the HCP Packer registry when the build was created.'
+        updates:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.BuildUpdates'
+    hashicorp.cloud.packer.UpdateBuildResponse:
+      type: object
+      properties:
+        build:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.Build'
+    hashicorp.cloud.packer.UpdateChannelRequest:
+      type: object
+      properties:
+        slug:
+          type: string
+          description: Human-readable name for the channel.
+        bucket_slug:
+          type: string
+          description: Human-readable name for the bucket that the channel is associated with.
+        incremental_version:
+          type: integer
+          format: int32
+          description: The human-readable version number assigned to this iteration.
+        iteration_id:
+          type: string
+          description: 'Unique identifier of the iteration. This was created and set by the
+
+            HCP Packer registry when the iteration was created.'
+        fingerprint:
+          type: string
+          title: 'Fingerprint of the iteration. The fingerprint is set by Packer when you
+
+            call `packer build`. It will most often correspond to a git commit sha,
+
+            but can be manually overridden by setting the environment variable
+
+            `HCP_PACKER_BUILD_FINGERPRINT`'
+        ratify:
+          type: boolean
+          title: Ratifies a revoked channel prior to the update
+        location:
+          $ref: '#/components/schemas/hashicorp.cloud.location.Location'
+    hashicorp.cloud.packer.UpdateChannelResponse:
+      type: object
+      properties:
+        channel:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.Channel'
+    hashicorp.cloud.packer.UpdateIterationRequest:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/hashicorp.cloud.location.Location'
+        bucket_slug:
+          type: string
+          description: Human-readable name for the bucket.
+        iteration_id:
+          type: string
+          description: 'Unique identifier of the iteration. This was created and set by the
+
+            HCP Packer registry when the iteration was created.'
+        complete:
+          type: boolean
+          description: 'Set to "true" when all builds associated with this iteration have
+
+            successfully completed and uploaded metadata to the registry. When
+
+            "complete" is true, this iteration is considered ready to use, and can
+
+            have channels assigned to it.'
+    hashicorp.cloud.packer.UpdateIterationResponse:
+      type: object
+      properties:
+        iteration:
+          $ref: '#/components/schemas/hashicorp.cloud.packer.Iteration'

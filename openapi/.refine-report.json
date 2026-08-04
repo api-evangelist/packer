@@ -1,0 +1,14 @@
+{
+  "provider": "packer",
+  "sources": [
+    "packer-packerservice-api-openapi.yml"
+  ],
+  "outputs": [
+    "packer-packerservice-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
