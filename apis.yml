@@ -5,6 +5,17 @@ description: >-
   source configuration. It automates the creation of pre-configured virtual machine and container images. HCP Packer
   adds a hosted artifact registry with a REST API for tracking image metadata, versions, channels, and security signals.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
