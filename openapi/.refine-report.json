@@ -1,7 +1,7 @@
 {
   "provider": "packer",
   "sources": [
-    "packer-packerservice-api-openapi.yml"
+    "_original/packer-openapi.yml"
   ],
   "outputs": [
     "packer-packerservice-api-openapi.yml"
@@ -9,6 +9,13 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "packer-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "packer-openapi.yml: declared missing tag: PackerService",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "packer-packerservice-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
