@@ -75,6 +75,9 @@ apis:
   - type: StatusPage
     url: https://status.hashicorp.com
 common:
+  - type: CapabilityMap
+    url: capabilities/packer-capability-edges.yml
+    name: Packer Business Capability Map
   - type: AgenticAccess
     url: agentic-access/packer-agentic-access.yml
   - type: DomainSecurity

@@ -1,0 +1,26 @@
+slug: packer
+provider: Packer
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: PackerService
+  spec_file: packer-packerservice-api-openapi.yml
+  capability_id: BC-4210
+  capability_id_l1: BC-4210
+  capability_name: Software Release & Deployment Management
+  confidence: 0.72
+  evidence: GET .../builds/{build_id} 'Get build'; PUT .../images 'Create bucket'; POST .../images/{bucket_slug}/channels
+    'Create channel'; 'API for managing Packer images'
+  reason: A hosted registry tracking machine-image builds, iterations and release channels — build artefact
+    production and release/promotion engineering. L1 Software Release & Deployment Management is clear;
+    evidence straddles CI artefact management and release channel engineering so no L2 is asserted.
